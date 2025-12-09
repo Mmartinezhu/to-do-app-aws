@@ -19,7 +19,6 @@ const { CognitoUserPool } = require("amazon-cognito-identity-js")
 
 function App() {
   const [token, setToken] = useState(null)
-  const [userId, setUserId] = useState(null)
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(false)
   const [newDesc, setNewDesc] = useState("")
@@ -33,7 +32,6 @@ function App() {
     const decoded = jwtDecode(jwt)
     const sub = decoded.sub
     setToken(jwt)
-    setUserId(sub)
     setTokenAndUser(jwt, sub)
   }
 
@@ -144,9 +142,7 @@ function App() {
       cognitoUser.signOut()
     }
 
-    // Limpiar estado
     setToken(null)
-    setUserId(null)
     setTasks([])
     setTokenAndUser(null, null)
   }
