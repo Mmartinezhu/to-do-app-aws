@@ -1,6 +1,15 @@
 import axios from "axios"
 
 const API_BASE = "https://d57tinotnl.execute-api.us-east-1.amazonaws.com/dev"
+const API_KEY = "nYcgpBeeCaAmUFovSCLE3V0VIMhSTBf69ykyVT60"
+
+// Cliente axios que siempre envía la API key
+const api = axios.create({
+  baseURL: API_BASE,
+  headers: {
+    "x-api-key": API_KEY,
+  },
+})
 
 let token = null
 let userId = null
@@ -15,7 +24,7 @@ function authHeaders() {
 }
 
 export async function getTasks() {
-  const res = await axios.get(`${API_BASE}/tasks`, {
+  const res = await api.get("/tasks", {
     params: { userId },
     headers: authHeaders(),
   })
@@ -24,8 +33,8 @@ export async function getTasks() {
 
 export async function createTask(description) {
   const taskId = `task-${Date.now()}`
-  const res = await axios.post(
-    `${API_BASE}/tasks`,
+  const res = await api.post(
+    "/tasks",
     {
       userId,
       taskId,
@@ -38,8 +47,8 @@ export async function createTask(description) {
 }
 
 export async function updateTask(task) {
-  const res = await axios.put(
-    `${API_BASE}/tasks`,
+  const res = await api.put(
+    "/tasks",
     {
       userId,
       taskId: task.taskId,
@@ -52,7 +61,7 @@ export async function updateTask(task) {
 }
 
 export async function deleteTask(taskId) {
-  const res = await axios.delete(`${API_BASE}/tasks`, {
+  const res = await api.delete("/tasks", {
     data: { userId, taskId },
     headers: authHeaders(),
   })
@@ -60,7 +69,7 @@ export async function deleteTask(taskId) {
 }
 
 export async function deleteAllTasks() {
-  const res = await axios.delete(`${API_BASE}/tasks/all`, {
+  const res = await api.delete("/tasks/all", {
     data: { userId },
     headers: authHeaders(),
   })
@@ -68,14 +77,13 @@ export async function deleteAllTasks() {
 }
 
 export async function getTasksByStatus(status) {
-  const res = await axios.get(`${API_BASE}/tasks/status`, {
+  const res = await api.get("/tasks/status", {
     params: { status, userId },
     headers: authHeaders(),
   })
 
   console.log("[api] respuesta getTasksByStatus cruda:", res.data)
 
-  // igual que en getTasks: soporta dos formatos
   if (Array.isArray(res.data)) return res.data
 
   if (res.data && res.data.body) {
@@ -86,12 +94,11 @@ export async function getTasksByStatus(status) {
 }
 
 export async function searchTasks(text) {
-  const res = await axios.get(`${API_BASE}/tasks/search`, {
+  const res = await api.get("/tasks/search", {
     params: { q: text, userId },
     headers: authHeaders(),
   })
 
-  // Maneja diferentes formatos de respuesta del backend
   if (Array.isArray(res.data)) return res.data
   if (res.data && res.data.body) return JSON.parse(res.data.body)
   return []

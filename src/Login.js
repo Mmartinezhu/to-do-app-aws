@@ -2,9 +2,13 @@
 
 import { useState } from "react"
 import { CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribute } from "amazon-cognito-identity-js"
-import { cognitoConfig } from "./config"
 
-const userPool = new CognitoUserPool(cognitoConfig)
+const poolData = {
+  UserPoolId: "us-east-1_g5qyxjQgv", 
+  ClientId: "1l1koh0smbgre51r12afop08l8",
+}
+
+const userPool = new CognitoUserPool(poolData)
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("")
@@ -108,7 +112,7 @@ function Login({ onLogin }) {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1 className="login-title">To-Do Serverless</h1>
+          <h1 className="login-title">To-Do App</h1>
           <p className="login-subtitle">Inicia sesión o crea tu cuenta</p>
         </div>
 

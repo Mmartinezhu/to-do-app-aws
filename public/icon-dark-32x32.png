@@ -1,0 +1,22 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <style>
+    @media (prefers-color-scheme: light) {
+      .background { fill: url(#gradient); }
+      .foreground { fill: white; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .background { fill: url(#gradient); }
+      .foreground { fill: white; }
+    }
+  </style>
+  <!-- Cuadrado con bordes redondeados -->
+  <rect class="background" x="20" y="20" width="140" height="140" rx="30" />
+  <!-- Check mark más claro: trazo corto que baja y trazo largo que sube -->
+  <path class="foreground" d="M 50 90 L 75 115 M 75 115 L 130 60" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+</svg>
