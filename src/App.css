@@ -183,11 +183,34 @@ body {
   flex: 1;
 }
 
+/* Agregados estilos para logo y título juntos */
+.header-logo-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+}
+
+.logo-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
 .header-title {
   font-size: 32px;
   font-weight: 700;
   color: white;
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 .header-subtitle {
@@ -214,8 +237,121 @@ body {
   color: #667eea;
 }
 
+/* Agregados estilos para la barra de filtros */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.filter-button {
+  flex: 1;
+  padding: 12px 24px;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  color: #718096;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.filter-button:hover {
+  border-color: #cbd5e0;
+  background: #f7fafc;
+}
+
+.filter-button.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+  color: white;
+}
+
+.filter-button.active:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
 .todo-body {
   padding: 32px;
+}
+
+/* Agregados estilos para el formulario de búsqueda */
+.search-form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 18px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-button {
+  padding: 12px 28px;
+  background: white;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  color: #667eea;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.search-button:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.clear-search-button {
+  padding: 12px 24px;
+  background: white;
+  border: 2px solid #a0aec0;
+  border-radius: 8px;
+  color: #a0aec0;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  white-space: nowrap;
+}
+
+.clear-search-button:hover {
+  background: #a0aec0;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(160, 174, 192, 0.3);
+}
+
+.search-info {
+  background: #edf2f7;
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .task-form {
@@ -255,6 +391,28 @@ body {
 .add-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Agregado estilo para el botón de borrar todas las tareas */
+.delete-all-button {
+  padding: 14px 24px;
+  background: white;
+  border: 2px solid #fc8181;
+  border-radius: 8px;
+  color: #fc8181;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  white-space: nowrap;
+}
+
+.delete-all-button:hover {
+  background: #fc8181;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(252, 129, 129, 0.4);
 }
 
 .loading {
@@ -358,6 +516,80 @@ body {
   color: white;
 }
 
+/* Estilos para paginación */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 2px solid #e2e8f0;
+}
+
+.pagination-button {
+  padding: 10px 20px;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.pagination-button:hover:not(:disabled) {
+  border-color: #667eea;
+  color: #667eea;
+  background: #f7fafc;
+}
+
+.pagination-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 8px;
+}
+
+.pagination-number {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.pagination-number:hover {
+  border-color: #667eea;
+  color: #667eea;
+  background: #f7fafc;
+}
+
+.pagination-number.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+  color: white;
+}
+
+.pagination-info {
+  text-align: center;
+  color: #718096;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .login-card,
@@ -384,6 +616,25 @@ body {
     padding: 24px;
   }
 
+  /* Responsive for filter bar */
+  .filter-bar {
+    flex-direction: column;
+  }
+
+  .filter-button {
+    width: 100%;
+  }
+
+  /* Responsive para formulario de búsqueda */
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-button,
+  .clear-search-button {
+    width: 100%;
+  }
+
   .task-form {
     flex-direction: column;
   }
@@ -392,8 +643,28 @@ body {
     width: 100%;
   }
 
+  /* Agregado estilo responsive para el botón de borrar todas */
+  .delete-all-button {
+    width: 100%;
+  }
+
   .header-title {
     font-size: 26px;
+  }
+
+  /* Responsivo para logo en móvil */
+  .header-logo-title {
+    gap: 12px;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-icon svg {
+    width: 24px;
+    height: 24px;
   }
 
   .task-item {
@@ -404,5 +675,21 @@ body {
 
   .delete-button {
     width: 100%;
+  }
+
+  /* Responsive para paginación */
+  .pagination {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pagination-button {
+    width: 100%;
+  }
+
+  .pagination-numbers {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }

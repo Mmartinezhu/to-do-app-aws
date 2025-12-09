@@ -1,0 +1,5 @@
+{
+  "bucketName": "tu-bucket-name-aqui",
+  "region": "us-east-1",
+  "cloudFrontDistributionId": "TU_DISTRIBUTION_ID_AQUI"
+}

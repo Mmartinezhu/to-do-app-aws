@@ -58,3 +58,41 @@ export async function deleteTask(taskId) {
   })
   return res.data
 }
+
+export async function deleteAllTasks() {
+  const res = await axios.delete(`${API_BASE}/tasks/all`, {
+    data: { userId },
+    headers: authHeaders(),
+  })
+  return res.data
+}
+
+export async function getTasksByStatus(status) {
+  const res = await axios.get(`${API_BASE}/tasks/status`, {
+    params: { status, userId },
+    headers: authHeaders(),
+  })
+
+  console.log("[api] respuesta getTasksByStatus cruda:", res.data)
+
+  // igual que en getTasks: soporta dos formatos
+  if (Array.isArray(res.data)) return res.data
+
+  if (res.data && res.data.body) {
+    return JSON.parse(res.data.body)
+  }
+
+  return []
+}
+
+export async function searchTasks(text) {
+  const res = await axios.get(`${API_BASE}/tasks/search`, {
+    params: { q: text, userId },
+    headers: authHeaders(),
+  })
+
+  // Maneja diferentes formatos de respuesta del backend
+  if (Array.isArray(res.data)) return res.data
+  if (res.data && res.data.body) return JSON.parse(res.data.body)
+  return []
+}
