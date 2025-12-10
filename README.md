@@ -7,9 +7,7 @@ Permite a usuarios autenticados crear, listar, actualizar, eliminar y buscar tar
 
 ## 1. Descripción general
 
-La aplicación ofrece un CRUD completo de tareas por usuario, incluyendo búsqueda por texto y paginación en el listado.
-
-Flujo de alto nivel:
+La aplicación ofrece un CRUD completo de tareas por usuario, incluyendo búsqueda por texto y paginación en el listado. Siguiendo el siguiente flujo:
 
 1. El usuario accede al frontend desplegado como sitio estático en Amazon S3.
 2. Inicia sesión mediante Amazon Cognito y obtiene un token JWT.
@@ -21,6 +19,9 @@ Flujo de alto nivel:
 ---
 
 ## 2. Arquitectura
+
+![ToDoAppArchitecture (1)](https://github.com/user-attachments/assets/8caa3626-2b00-474e-a80f-0c92577acfe7)
+
 
 Servicios principales utilizados:
 
@@ -37,17 +38,14 @@ Servicios principales utilizados:
   - Endpoints principales:
     - `GET /tasks` – Listar tareas con paginación.
     - `POST /tasks` – Crear tarea.
-    - `PUT /tasks/{id}` – Actualizar estado de la tarea.
-    - `DELETE /tasks/{id}` – Eliminar tarea.
-    - `GET /tasks/search` – Buscar tareas por texto.
+    - `PUT /tasks` – Actualizar estado de la tarea.
+    - `DELETE /tasks` – Eliminar 1 tarea.
+    - `GET /search` – Buscar tareas por texto.
+    -  `DELETE /all`  - Eliminar todas las tareas.
   - Protecciones:
     - Lambda Authorizer que valida el token de Cognito.
     - API Key en el header `x-api-key` asociada a un Usage Plan.
 
-- **Lógica de negocio**
-  - AWS Lambda (Node.js):
-    - Lambda principal: CRUD, búsqueda y paginación.
-    - Lambda Authorizer: validación de token JWT emitido por Cognito.
 
 - **Base de datos**
   - Amazon DynamoDB:
@@ -65,49 +63,8 @@ Servicios principales utilizados:
     - Alarmas sobre errores (5xx / errores en Lambda) que envían notificación cuando se superan umbrales definidos.
 
 ---
+- ** Frontend **
+  Los archivos de la carpeta build se deben subir a s3 para que funcione como un frontend estatico. En este caso ya esta construido pero puede le puede hacer build nuevamente si cambia algo con "npm build"  y subiendo los archivos nuevamente al bucket de s3.
 
-## 3. Estructura del repositorio
-
-La estructura general del repositorio es:
-
-```text
-.
-├── backend/          # Código del backend (AWS Lambda, authorizer, etc.)
-│   ├── handler.js    # Lambda principal: CRUD, búsqueda, paginación
-│   ├── authorizer.js # Lambda Authorizer: validación token Cognito
-│   ├── package.json  # Dependencias backend
-│   └── ...
-├── src/              # Código del frontend (React)
-├── public/
-├── package.json      # Dependencias frontend
-├── README.md
-└── ...
-
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  ** Backend **
+  Se dejan a disposicoin las funciones lambda utilizada para el correcto funcionamiento de la pagina, se deben configurar como funcion de python o como archivo j.son Node.js x20
