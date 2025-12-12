@@ -7,7 +7,7 @@ Permite a usuarios autenticados crear, listar, actualizar, eliminar y buscar tar
 
 ## 1. Descripción general
 
-La aplicación ofrece un CRUD completo de tareas por usuario, incluyendo búsqueda por texto y paginación en el listado. Siguiendo el siguiente flujo:
+La aplicación ofrece un CRUD completo de tareas por usuario, incluyendo búsqueda por texto y paginación en el listado. Se sigue el siguiente flujo:
 
 1. El usuario accede al frontend desplegado como sitio estático en Amazon S3.
 2. Inicia sesión mediante Amazon Cognito y obtiene un token JWT.
@@ -64,7 +64,7 @@ Servicios principales utilizados:
 
 ---
 - ** Frontend **
-  Los archivos de la carpeta build se deben subir a s3 para que funcione como un frontend estatico. En este caso ya esta construido pero puede le puede hacer build nuevamente si cambia algo con "npm build"  y subiendo los archivos nuevamente al bucket de s3.
+  Los archivos de la carpeta build se deben subir a S3 para que funcione como un frontend estático. En este caso ya esta construido pero puede se le puede hacer build nuevamente si se cambia algo con "npm build" y subiendo los archivos nuevamente al bucket de S3.
 
   ** Backend **
-  Se dejan a disposicoin las funciones lambda utilizada para el correcto funcionamiento de la pagina, se deben configurar como funcion de python o como archivo j.son Node.js x20
+  Se dejan a disposición las funciones Lambda utilizadas para el correcto funcionamiento de la página, se deben configurar como función de python o como archivo j.son Node.js x20.
