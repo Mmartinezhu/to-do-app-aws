@@ -2,13 +2,9 @@
 
 import { useState } from "react"
 import { CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribute } from "amazon-cognito-identity-js"
+import { cognitoConfig } from "./config"
 
-const poolData = {
-  UserPoolId: "us-east-1_g5qyxjQgv", 
-  ClientId: "1l1koh0smbgre51r12afop08l8",
-}
-
-const userPool = new CognitoUserPool(poolData)
+const userPool = new CognitoUserPool(cognitoConfig)
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("")
