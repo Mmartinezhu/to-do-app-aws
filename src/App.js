@@ -31,7 +31,7 @@ function App() {
     setAuthToken(jwt)
   }
 
-const loadTasks = async (filterType = filter) => {
+  const loadTasks = async (filterType = filter) => {
   setLoading(true)
 
   try {
