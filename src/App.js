@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { jwtDecode } from "jwt-decode"
 import Login from "./Login"
 import {
-  setToken,
+  setToken as setApiToken,
   getTasks,
   createTask,
   updateTask,
@@ -18,7 +18,7 @@ import { cognitoConfig } from "./config"
 const { CognitoUserPool } = require("amazon-cognito-identity-js")
 
 function App() {
-  const [token, setToken] = useState(null)
+  const [token, setAuthToken] = useState(null)
   const [userId, setUserId] = useState(null)
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(false)
@@ -32,9 +32,9 @@ function App() {
   const onLogin = (jwt) => {
     const decoded = jwtDecode(jwt)
     const sub = decoded.sub
-    setToken(jwt)
+    setApiToken(jwt)
+    setAuthToken(jwt)
     setUserId(sub)
-    setToken(jwt)
   }
 
   const loadTasks = async (filterType = filter) => {
@@ -145,10 +145,10 @@ function App() {
     }
 
     // Limpiar estado
-    setToken(null)
+    setAuthToken(null)
     setUserId(null)
     setTasks([])
-    setTokenAndUser(null, null)
+    setApiToken(null)
   }
 
   const handleSearch = async (e) => {
