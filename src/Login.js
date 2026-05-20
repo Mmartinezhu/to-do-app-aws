@@ -1,4 +1,3 @@
-"use client"
 
 import { useState } from "react"
 import { CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribute } from "amazon-cognito-identity-js"
