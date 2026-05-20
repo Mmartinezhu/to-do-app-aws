@@ -1,11 +1,9 @@
 import axios from "axios"
-
 import { apiConfig } from "./config"
 
 const API_BASE = apiConfig.baseUrl
 const API_KEY = apiConfig.apiKey
 
-// Cliente axios que siempre envía la API key
 const api = axios.create({
   baseURL: API_BASE,
   headers: {
@@ -14,7 +12,6 @@ const api = axios.create({
 })
 
 let token = null
-
 
 export function setToken(jwt) {
   token = jwt
@@ -26,7 +23,6 @@ function authHeaders() {
 
 export async function getTasks() {
   const res = await api.get("/tasks", {
-    params: { userId },
     headers: authHeaders(),
   })
   return res.data
@@ -37,7 +33,6 @@ export async function createTask(description) {
   const res = await api.post(
     "/tasks",
     {
-      userId,
       taskId,
       description,
       status: "pending",
@@ -51,7 +46,6 @@ export async function updateTask(task) {
   const res = await api.put(
     "/tasks",
     {
-      userId,
       taskId: task.taskId,
       description: task.description,
       status: task.status,
@@ -63,7 +57,7 @@ export async function updateTask(task) {
 
 export async function deleteTask(taskId) {
   const res = await api.delete("/tasks", {
-    data: { userId, taskId },
+    data: { taskId },
     headers: authHeaders(),
   })
   return res.data
@@ -71,7 +65,6 @@ export async function deleteTask(taskId) {
 
 export async function deleteAllTasks() {
   const res = await api.delete("/tasks/all", {
-    data: { userId },
     headers: authHeaders(),
   })
   return res.data
@@ -79,28 +72,24 @@ export async function deleteAllTasks() {
 
 export async function getTasksByStatus(status) {
   const res = await api.get("/tasks/status", {
-    params: { status, userId },
+    params: { status },
     headers: authHeaders(),
   })
 
-  console.log("[api] respuesta getTasksByStatus cruda:", res.data)
-
   if (Array.isArray(res.data)) return res.data
-
-  if (res.data && res.data.body) {
-    return JSON.parse(res.data.body)
-  }
+  if (res.data && res.data.body) return JSON.parse(res.data.body)
 
   return []
 }
 
 export async function searchTasks(text) {
   const res = await api.get("/tasks/search", {
-    params: { q: text, userId },
+    params: { q: text },
     headers: authHeaders(),
   })
 
   if (Array.isArray(res.data)) return res.data
   if (res.data && res.data.body) return JSON.parse(res.data.body)
+
   return []
 }
