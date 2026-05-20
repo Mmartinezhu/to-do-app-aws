@@ -4,7 +4,7 @@ import { useState } from "react"
 import { CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribute } from "amazon-cognito-identity-js"
 import { cognitoConfig } from "./config"
 
-const userPool = new CognitoUserPool(cognitoConfig)
+const createUserPool = () => new CognitoUserPool(cognitoConfig)
 
 function Login({ onLogin }) {
   const [email, setEmail] = useState("")
@@ -29,6 +29,7 @@ function Login({ onLogin }) {
       return
     }
 
+    const userPool = createUserPool()
     const attributeList = [
       new CognitoUserAttribute({
         Name: "email",
@@ -52,6 +53,7 @@ function Login({ onLogin }) {
       return
     }
 
+    const userPool = createUserPool()
     const userData = {
       Username: email,
       Pool: userPool,
@@ -76,6 +78,7 @@ function Login({ onLogin }) {
       return
     }
 
+    const userPool = createUserPool()
     const authenticationData = {
       Username: email,
       Password: password,
