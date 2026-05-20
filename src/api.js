@@ -1,7 +1,9 @@
 import axios from "axios"
 
-const API_BASE = process.env.REACT_APP_API_BASE_URL
-const API_KEY = process.env.REACT_APP_API_KEY
+import { apiConfig } from "./config"
+
+const API_BASE = apiConfig.baseUrl
+const API_KEY = apiConfig.apiKey
 
 // Cliente axios que siempre envía la API key
 const api = axios.create({
