@@ -328,3 +328,5 @@ Manuel Santiago Martínez Hurtado
 Andrea Sanchez Jimenez
 
 GitHub: [@Mmartinezhu](https://github.com/Mmartinezhu)
+email: mmartinezhu@unal.edu.co
+       asanchezji@unal.edu.co
