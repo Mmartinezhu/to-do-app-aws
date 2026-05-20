@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { jwtDecode } from "jwt-decode"
 import Login from "./Login"
 import {
-  setTokenAndUser,
+  setToken,
   getTasks,
   createTask,
   updateTask,
