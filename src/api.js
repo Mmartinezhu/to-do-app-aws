@@ -14,11 +14,10 @@ const api = axios.create({
 })
 
 let token = null
-let userId = null
 
-export function setTokenAndUser(jwt, sub) {
+
+export function setToken(jwt) {
   token = jwt
-  userId = sub
 }
 
 function authHeaders() {
