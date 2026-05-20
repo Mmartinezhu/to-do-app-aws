@@ -1,4 +1,3 @@
-"use client"
 
 import { useState, useEffect } from "react"
 import Login from "./Login"
@@ -32,39 +31,29 @@ function App() {
     setAuthToken(jwt)
   }
 
-  const loadTasks = async (filterType = filter) => {
-    setLoading(true)
-    try {
-      console.log("[v0] Cargando tareas con filtro:", filterType)
+const loadTasks = async (filterType = filter) => {
+  setLoading(true)
 
-      let data
-      if (filterType === "pending") {
-        console.log("[v0] Llamando getTasksByStatus('pending')")
-        data = await getTasksByStatus("pending")
-        console.log("[v0] Respuesta de getTasksByStatus:", data)
-      } else {
-        console.log("[v0] Llamando getTasks()")
-        data = await getTasks()
-        console.log("[v0] Respuesta de getTasks:", data)
-      }
+  try {
+    const data =
+      filterType === "pending"
+        ? await getTasksByStatus("pending")
+        : await getTasks()
 
-      if (Array.isArray(data)) {
-        console.log("[v0] Tareas encontradas:", data.length)
-        setTasks(data)
-        setCurrentPage(1)
-      } else {
-        console.error("Error: respuesta no es un array:", data)
-        setTasks([])
-      }
-    } catch (error) {
-      console.error("Error al cargar tareas:", error)
-      console.error("[v0] Error completo:", error.response?.data || error.message)
-      alert("Error al cargar las tareas")
+    if (Array.isArray(data)) {
+      setTasks(data)
+      setCurrentPage(1)
+    } else {
       setTasks([])
-    } finally {
-      setLoading(false)
     }
+  } catch (error) {
+    console.error("Error loading tasks:", error)
+    alert("Error al cargar las tareas")
+    setTasks([])
+  } finally {
+    setLoading(false)
   }
+}
 
   useEffect(() => {
     if (token) {
