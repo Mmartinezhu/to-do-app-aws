@@ -34,7 +34,7 @@ function App() {
     const sub = decoded.sub
     setToken(jwt)
     setUserId(sub)
-    setTokenAndUser(jwt, sub)
+    setToken(jwt)
   }
 
   const loadTasks = async (filterType = filter) => {
