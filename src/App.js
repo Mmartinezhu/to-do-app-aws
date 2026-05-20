@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { jwtDecode } from "jwt-decode"
 import Login from "./Login"
 import {
   setToken as setApiToken,
@@ -19,7 +18,6 @@ const { CognitoUserPool } = require("amazon-cognito-identity-js")
 
 function App() {
   const [token, setAuthToken] = useState(null)
-  const [userId, setUserId] = useState(null)
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(false)
   const [newDesc, setNewDesc] = useState("")
@@ -30,11 +28,8 @@ function App() {
   const tasksPerPage = 5
 
   const onLogin = (jwt) => {
-    const decoded = jwtDecode(jwt)
-    const sub = decoded.sub
     setApiToken(jwt)
     setAuthToken(jwt)
-    setUserId(sub)
   }
 
   const loadTasks = async (filterType = filter) => {
@@ -146,7 +141,6 @@ function App() {
 
     // Limpiar estado
     setAuthToken(null)
-    setUserId(null)
     setTasks([])
     setApiToken(null)
   }
